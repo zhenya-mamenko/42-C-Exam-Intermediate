@@ -1,6 +1,6 @@
 Assignment name  : reverse_tree
 Expected files   : reverse_tree.c
-Allowed functions: 
+Allowed functions:
 --------------------------------------------------------------------------------
 
 Implement a function to reverse a binary tree (i.e., flip it from right to left).
@@ -9,9 +9,9 @@ You must declare the following node structure for the binary tree in your code:
 
 
 	struct s_node {
-		int           value;
-		struct s_node *right;
-		struct s_node *left;
+		int				value;
+		struct s_node	*right;
+		struct s_node	*left;
 	};
 
 

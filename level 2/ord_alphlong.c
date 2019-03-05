@@ -1,11 +1,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-typedef struct s_strings
+typedef struct	s_strings
 {
-	char *s;
-	struct s_strings *next;
-}	t_strings;
+	char		*s;
+	struct		s_strings *next;
+}				t_strings;
 
 typedef struct s_lines
 {

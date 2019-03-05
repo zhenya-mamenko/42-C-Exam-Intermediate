@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-typedef struct s_occ
+typedef struct	s_occ
 {
 	char	c;
 	int		count;
-} t_occ;
+} 				t_occ;
 
 void	count_alpha(char *s)
 {
@@ -41,7 +41,7 @@ void	count_alpha(char *s)
 				cnt += 1;
 			}
 			a[j].count += 1;
-			
+
 		}
 		i += 1;
 	}

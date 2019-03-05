@@ -11,12 +11,11 @@ For example aA and Aa are the same but the  original order must remain
 (lower and upper case are the same in alphabetical order). If there are
 duplicates, they must remain.
 
-If number of parameters is different from 1, the program prints 
-\n.
+If number of parameters is different from 1, the program prints \n.
 
 There will be only spaces, tabs and alphanumeric caracters in strings.
 
-You'll print only one space between each word. Nothing before the first and 
+You'll print only one space between each word. Nothing before the first and
 after the last word of each line.
 
 Examples:

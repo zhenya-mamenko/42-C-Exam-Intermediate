@@ -19,6 +19,7 @@ int		calc_height(struct s_node *el)
 			max = count;
 		i += 1;
 	}
+
 	return (max);
 }
 
@@ -31,5 +32,6 @@ int		height_tree(struct s_node *root)
 	{
 		result = calc_height(root);
 	}
+
 	return (result);
 }

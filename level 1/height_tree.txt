@@ -1,6 +1,6 @@
 Assignment name  : height_tree
 Expected files   : height_tree.c
-Allowed functions: 
+Allowed functions:
 --------------------------------------------------------------------------------
 
 Implement a function to calculate the height of an n-ary tree.
@@ -8,8 +8,8 @@ Implement a function to calculate the height of an n-ary tree.
 Your should use the following node structure in your code for the n-ary tree:
 
 	struct s_node {
-		int           value;
-		struct s_node **nodes;
+		int				value;
+		struct s_node	**nodes;
 	};
 
 In this struct nodes is a null-terminated array.

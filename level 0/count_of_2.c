@@ -11,6 +11,7 @@ int		c2num(int n)
 	}
 	if (n % 10 == 2)
 		count += 1;
+
 	return (count);
 }
 
@@ -26,5 +27,6 @@ int		count_of_2(int n)
 		result += c2num(i);
 		i += 1;
 	}
+
 	return (result);
 }

@@ -8,7 +8,7 @@ that appear in all the numbers between 0 and n (inclusive).
 
 Your function must be declared as follows:
 
-int    count_of_2(int n);
+int		count_of_2(int n);
 
 If n <= 1, the function returns 0;
 

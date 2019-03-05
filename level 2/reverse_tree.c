@@ -5,6 +5,7 @@ struct				s_node
 	struct s_node	*left;
 };
 
+
 void				reverse(struct s_node *el)
 {
 	struct s_node	*tmp;

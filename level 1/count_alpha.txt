@@ -1,6 +1,6 @@
-Assignment name  : count_alpha
-Expected files   : count_alpha.c
-Allowed functions: write, printf
+Assignment name		: count_alpha
+Expected files		: count_alpha.c
+Allowed functions	: write, printf
 --------------------------------------------------------------------------------
 
 Write a program called count_alpha that takes a string and displays the number
