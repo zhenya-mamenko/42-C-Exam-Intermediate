@@ -1,70 +1,104 @@
-#include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
-void fill(char *s, int i, int n, int k, int len)
+void count(char *s, int row, int col, int r, int l, int k)
 {
-    s[i] = '0' + k;
-    if (i - 1 >= 0 && s[i - 1] == 'X')
-        fill(s, i - 1 , n, k, len);
-    if (i + 1 < len && s[i + 1] == 'X')
-        fill(s, i + 1 , n, k, len);
-    if (i - n >= 0 && s[i - n] == 'X')
-        fill(s, i - n , n, k, len);
-    if (i + n < len && s[i + n] == 'X')
-        fill(s, i + n , n, k, len);
+    s[row * l + col] = '0' + k;
+    if (row > 0 && s[(row - 1) * l + col] == 'X')
+        count(s, row - 1, col, r, l, k);
+    if (row + 1 < r && s[(row + 1) * l + col] == 'X')
+        count(s, row + 1, col, r, l, k);
+    if (col > 0 && s[row * l + col - 1] == 'X')
+        count(s, row, col - 1, r, l, k);
+    if (col + 1 < l && s[row * l + col + 1] == 'X')
+        count(s, row, col + 1, r, l, k);
 }
 
-void count_island(char *f)
+void count_island(char *s)
 {
-    int fd, len, tmp;
-    char buf[1000];
-    char *q;
+    char buf[1024], *island;
+    int fd, l, i, cnt, r;
 
-    fd = open(f, O_RDONLY);
+    fd = open(s, O_RDONLY);
     if (fd == -1)
-        return ;
-    len = 0;
-    while ((tmp = read(fd, buf, 1000)) > 0)
-        len += tmp;
-    if (close(fd) == -1 || len == 0)
-        return ;
-    fd = open(f, O_RDONLY);
-    if (fd == -1)
-        return ;
-    q = malloc(len + 1);
-    q[len] = '\0';
-    if (q == NULL)
-        return ;
-    read(fd, q, len);
-    close(fd);
-    int n = -1, i = 0;
-    while (q[i])
     {
-        if (q[i] != '\n' && q[i] != '.' && q[i] != 'X')
-            return ;
-        if (q[i++] == '\n')
+        write(1, "\n", 1);
+        return ;
+    }
+    l = read(fd, buf, 1024);
+    if (close(fd) == -1 || l <= 0)
+    {
+        write(1, "\n", 1);
+        return ;
+    }
+    i = 0;
+    while (i < l)
+    {
+        if (buf[i] == '\n')
+            break ;
+        i++;
+    }
+    if (i == l)
+    {
+        write(1, "\n", 1);
+        return ;
+    }
+    l = i + 1;
+    if ((island = malloc(100000)) == NULL)
+    {
+        write(1, "\n", 1);
+        return ;
+    }
+    i = 0;
+    while (i < 100000)
+        island[i++] = '\0';
+    fd = open(s, O_RDONLY);
+    if (fd == -1)
+    {
+        write(1, "\n", 1);
+        return ;
+    }
+    r = 0;
+    while ((cnt = read(fd, buf, l)) > 0)
+    {
+        if (cnt != l || buf[l - 1] != '\n')
         {
-            if (n == -1)
-                n = i;
-            else if (i % n != 0)
-                return ;
+            write(1, "\n", 1);
+            return ;
         }
+        i = 0;
+        while (i < l)
+        {
+            if ((buf[i] != '\n' && buf[i] != 'X' && buf[i] != '.') || (buf[i] == '\n' && i != l - 1))
+            {
+                write(1, "\n", 1);
+                return ;
+            }
+            island[r * l + i] = buf[i];
+            i++;
+        }
+        r++;
     }
     int k = 0;
     i = 0;
-    while (q[i])
+    while (i < r)
     {
-        if (q[i] == 'X')
-            fill(q, i, n, k++, len);
+        int j = 0;
+        while (j < l)
+        {
+            if (island[i * l + j] == 'X')
+                count(island, i, j, r, l, k++);
+            j++;
+        }
         i++;
     }
-    write(1, q, len);
+    write(1, island, r * l);
 }
 
 int main(int ac, char **av)
 {
-    if (ac == 2)
+    if (ac == 2 && av[1][0] != '\0')
         count_island(av[1]);
     else
         write(1, "\n", 1);
